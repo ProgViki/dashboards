@@ -503,4 +503,162 @@
                                 <div class="budget-progress-fill" style="width: 75%"></div>
                             </div>
                         </div>
-                   
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; margin-top: 30px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Recent Transactions</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="transaction-item">
+                                <div class="transaction-info">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h4>Grocery Store</h4>
+                                        <p>Jun 12, 2023</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount amount-negative">-$86.50</div>
+                            </div>
+                            <div class="transaction-item">
+                                <div class="transaction-info">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h4>Rent Payment</h4>
+                                        <p>Jun 10, 2023</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount amount-negative">-$1,200.00</div>
+                            </div>
+                            <div class="transaction-item">
+                                <div class="transaction-info">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h4>Salary</h4>
+                                        <p>Jun 5, 2023</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount amount-positive">+$4,500.00</div>
+                            </div>
+                            <div class="transaction-item">
+                                <div class="transaction-info">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h4>Restaurant</h4>
+                                        <p>Jun 3, 2023</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount amount-negative">-$65.30</div>
+                            </div>
+                            <div class="transaction-item">
+                                <div class="transaction-info">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-film"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <h4>Netflix</h4>
+                                        <p>Jun 1, 2023</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount amount-negative">-$15.99</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Investment Portfolio</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="portfolioChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        window.onload = function() {
+            const incomeExpenseCtx = document.getElementById('incomeExpenseChart').getContext('2d');
+            const incomeExpenseChart = new Chart(incomeExpenseCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        {
+                            label: 'Income',
+                            data: [7500, 8200, 7800, 8600, 9000, 8450],
+                            backgroundColor: '#4cc9f0',
+                            borderWidth: 0
+                        },
+                        {
+                            label: 'Expenses',
+                            data: [4200, 3800, 4500, 4100, 4800, 3240],
+                            backgroundColor: '#f72585',
+                            borderWidth: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
+            const portfolioChart = new Chart(portfolioCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Stocks', 'Bonds', 'Real Estate', 'Cash', 'Crypto'],
+                    datasets: [{
+                        data: [45, 20, 15, 12, 8],
+                        backgroundColor: [
+                            '#4895ef',
+                            '#4cc9f0',
+                            '#f8961e',
+                            '#f72585',
+                            '#6c757d'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
