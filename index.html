@@ -1,1 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --info: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fb 0%, #e4e8f5 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-description {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-features {
+            list-style-type: none;
+        }
+
+        .card-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-features li i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .card-footer {
+            padding: 20px 25px;
+            background-color: rgba(0, 0, 0, 0.02);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Color variations for different dashboards */
+        .dashboard-1 .card-icon { background-color: var(--primary); }
+        .dashboard-2 .card-icon { background-color: var(--danger); }
+        .dashboard-3 .card-icon { background-color: var(--success); }
+        .dashboard-4 .card-icon { background-color: var(--warning); }
+        .dashboard-5 .card-icon { background-color: var(--info); }
+        .dashboard-6 .card-icon { background-color: var(--primary); }
+        .dashboard-7 .card-icon { background-color: var(--danger); }
+        .dashboard-8 .card-icon { background-color: var(--success); }
+        .dashboard-9 .card-icon { background-color: var(--warning); }
+        .dashboard-10 .card-icon { background-color: var(--info); }
+
+        .dashboard-1 .card-badge { background-color: rgba(67, 97, 238, 0.1); color: var(--primary); }
+        .dashboard-2 .card-badge { background-color: rgba(247, 37, 133, 0.1); color: var(--danger); }
+        .dashboard-3 .card-badge { background-color: rgba(76, 201, 240, 0.1); color: var(--success); }
+        .dashboard-4 .card-badge { background-color: rgba(248, 150, 30, 0.1); color: var(--warning); }
+        .dashboard-5 .card-badge { background-color: rgba(72, 149, 239, 0.1); color: var(--info); }
+        .dashboard-6 .card-badge { background-color: rgba(67, 97, 238, 0.1); color: var(--primary); }
+        .dashboard-7 .card-badge { background-color: rgba(247, 37, 133, 0.1); color: var(--danger); }
+        .dashboard-8 .card-badge { background-color: rgba(76, 201, 240, 0.1); color: var(--success); }
+        .dashboard-9 .card-badge { background-color: rgba(248, 150, 30, 0.1); color: var(--warning); }
+        .dashboard-10 .card-badge { background-color: rgba(72, 149, 239, 0.1); color: var(--info); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Modern Dashboard Collection</h1>
+            <p class="subtitle">Explore 10 different dashboard designs with modern UI and advanced features. Each dashboard is tailored for specific use cases.</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Dashboard 1: Analytics -->
+            <div class="dashboard-card dashboard-1">
+                <div class="card-badge">Popular</div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="card-title">Analytics Dashboard</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Track website performance, user behavior, and conversion metrics with beautiful data visualizations.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Traffic overview charts</li>
+                        <li><i class="fas fa-check"></i> User engagement metrics</li>
+                        <li><i class="fas fa-check"></i> Conversion funnel analysis</li>
+                        <li><i class="fas fa-check"></i> Real-time data updates</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="analytics.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated today</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 2: E-commerce -->
+            <div class="dashboard-card dashboard-2">
+                <div class="card-badge">Featured</div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="card-title">E-commerce Dashboard</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Monitor sales performance, inventory, customer behavior, and revenue metrics for your online store.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Sales performance tracking</li>
+                        <li><i class="fas fa-check"></i> Product inventory management</li>
+                        <li><i class="fas fa-check"></i> Customer analytics</li>
+                        <li><i class="fas fa-check"></i> Revenue forecasting</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="ecommerce.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated today</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 3: Project Management -->
+            <div class="dashboard-card dashboard-3">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="card-title">Project Management</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Manage projects, track progress, allocate resources, and collaborate with your team effectively.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Task tracking & milestones</li>
+                        <li><i class="fas fa-check"></i> Team collaboration tools</li>
+                        <li><i class="fas fa-check"></i> Resource allocation</li>
+                        <li><i class="fas fa-check"></i> Progress analytics</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="project-management.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated yesterday</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 4: CRM -->
+            <div class="dashboard-card dashboard-4">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-title">CRM Dashboard</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Manage customer relationships, track interactions, and analyze customer data for better engagement.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Customer database</li>
+                        <li><i class="fas fa-check"></i> Interaction tracking</li>
+                        <li><i class="fas fa-check"></i> Sales pipeline</li>
+                        <li><i class="fas fa-check"></i> Customer segmentation</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="crm.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated 2 days ago</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 5: Finance -->
+            <div class="dashboard-card dashboard-5">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="card-title">Finance Dashboard</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Monitor financial performance, track expenses, analyze investments, and manage budgets effectively.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Expense tracking</li>
+                        <li><i class="fas fa-check"></i> Budget management</li>
+                        <li><i class="fas fa-check"></i> Investment analytics</li>
+                        <li><i class="fas fa-check"></i> Financial reporting</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="finance.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated today</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 6: Performance -->
+            <div class="dashboard-card dashboard-6">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="card-title">Performance Dashboard</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Track key performance indicators, monitor goals, and analyze business performance metrics.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> KPI tracking</li>
+                        <li><i class="fas fa-check"></i> Goal monitoring</li>
+                        <li><i class="fas fa-check"></i> Performance analytics</li>
+                        <li><i class="fas fa-check"></i> Benchmark comparisons</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="performance.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated today</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 7: Health & Fitness -->
+            <div class="dashboard-card dashboard-7">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="card-title">Health & Fitness</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Track workouts, monitor health metrics, set fitness goals, and analyze your wellness journey.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Activity tracking</li>
+                        <li><i class="fas fa-check"></i> Health metrics monitoring</li>
+                        <li><i class="fas fa-check"></i> Workout plans</li>
+                        <li><i class="fas fa-check"></i> Progress analytics</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="health-fitness.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated today</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 8: Education -->
+            <div class="dashboard-card dashboard-8">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="card-title">Education Dashboard</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Monitor student progress, track course completion, and analyze educational outcomes.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Student progress tracking</li>
+                        <li><i class="fas fa-check"></i> Course analytics</li>
+                        <li><i class="fas fa-check"></i> Learning outcomes</li>
+                        <li><i class="fas fa-check"></i> Engagement metrics</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="education.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated yesterday</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 9: System Monitoring -->
+            <div class="dashboard-card dashboard-9">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="card-title">System Monitoring</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Monitor server performance, track system resources, and receive alerts for critical issues.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Server performance metrics</li>
+                        <li><i class="fas fa-check"></i> Resource utilization</li>
+                        <li><i class="fas fa-check"></i> System alerts</li>
+                        <li><i class="fas fa-check"></i> Uptime monitoring</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="system-monitoring.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated today</span>
+                </div>
+            </div>
+
+            <!-- Dashboard 10: Creative Studio -->
+            <div class="dashboard-card dashboard-10">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="card-title">Creative Studio</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Manage creative projects, track deadlines, and collaborate with team members effectively.</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Project timelines</li>
+                        <li><i class="fas fa-check"></i> Asset management</li>
+                        <li><i class="fas fa-check"></i> Team collaboration</li>
+                        <li><i class="fas fa-check"></i> Creative workflow</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="creative-studio.html" class="btn btn-primary">Open Dashboard</a>
+                    <span><i class="far fa-clock"></i> Updated today</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click event to all dashboard cards
+        document.querySelectorAll('.dashboard-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Only trigger if the click wasn't on the button itself
+                if (!e.target.classList.contains('btn')) {
+                    const link = this.querySelector('a.btn');
+                    if (link) {
+                        window.location.href = link.getAttribute('href');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
