@@ -1,1 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Studio Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #4895ef;
+            --secondary: #3a7bc8;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --sidebar-width: 250px;
+            --header-height: 70px;
+            --transition: all 0.3s ease;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: var(--transition);
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .sidebar-menu {
+            padding: 15px 0;
+        }
+
+        .sidebar-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left-color: white;
+        }
+
+        .sidebar-item.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-left-color: white;
+        }
+
+        .sidebar-item i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: var(--transition);
+        }
+
+        .header {
+            height: var(--header-height);
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .back-btn {
+            margin-right: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn i {
+            margin-right: 5px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .dashboard-content {
+            padding: 30px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 25px 20px;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+            background-color: rgba(72, 149, 239, 0.1);
+            color: var(--primary);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .chart-container {
+            height: 250px;
+            position: relative;
+        }
+
+        .project-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .project-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .project-details h4 {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .project-details p {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .project-stats {
+            text-align: right;
+        }
+
+        .project-deadline {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .project-status {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .task-checkbox.checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .task-details h4 {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .task-details p {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .task-priority {
+            text-align: right;
+        }
+
+        .priority-high {
+            color: #f72585;
+            font-weight: 600;
+        }
+
+        .priority-medium {
+            color: #f8961e;
+            font-weight: 600;
+        }
+
+        .priority-low {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+
+        .task-project {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .progress-item {
+            margin-bottom: 15px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background-color: var(--primary);
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Creative Studio</h2>
+            </div>
+            <div class="sidebar-menu">
+                <div class="sidebar-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-palette"></i>
+                    <span>Projects</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tasks</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-users"></i>
+                    <span>Team</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Assets</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <div class="header-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <a href="index.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboards
+                    </a>
+                    <h1>Creative Studio Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-avatar">JD</div>
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="dashboard-grid">
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">Active Projects</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-value">42</div>
+                        <div class="stat-label">Tasks This Week</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-value">78%</div>
+                        <div class="stat-label">On Time Delivery</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Team Members</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; margin-top: 30px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Project Timeline</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="timelineChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Project Distribution</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="projectChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; margin-top: 30px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Active Projects</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="project-item">
+                                <div class="project-info">
+                                    <div class="project-color" style="background-color: #4895ef;"></div>
+                                    <div class="project-details">
+                                        <h4>Website Redesign</h4>
+                                        <p>Client: TechCorp Inc.</p>
+                                    </div>
+                                </div>
+                                <div class="project-stats">
+                                    <div class="project-deadline">Jun 25</div>
+                                    <div class="project-status">Design Phase</div>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-info">
+                                    <div class="project-color" style="background-color: #4cc9f0;"></div>
+                                    <div class="project-details">
+                                        <h4>Mobile App UI</h4>
+                                        <p>Client: StartupXYZ</p>
+                                    </div>
+                                </div>
+                                <div class="project-stats">
+                                    <div class="project-deadline">Jul 5</div>
+                                    <div class="project-status">Development</div>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-info">
+                                    <div class="project-color" style="background-color: #f8961e;"></div>
+                                    <div class="project-details">
+                                        <h4>Brand Identity</h4>
+                                        <p>Client: FreshFoods</p>
+                                    </div>
+                                </div>
+                                <div class="project-stats">
+                                    <div class="project-deadline">Jun 30</div>
+                                    <div class="project-status">Review</div>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-info">
+                                    <div class="project-color" style="background-color: #f72585;"></div>
+                                    <div class="project-details">
+                                        <h4>Marketing Campaign</h4>
+                                        <p>Client: GlobalTech</p>
+                                    </div>
+                                </div>
+                                <div class="project-stats">
+                                    <div class="project-deadline">Jul 15</div>
+                                    <div class="project-status">Planning</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">My Tasks</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-checkbox checked">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="task-details">
+                                        <h4>Create homepage mockup</h4>
+                                        <p>Website Redesign</p>
+                                    </div>
+                                </div>
+                                <div class="task-priority">
+                                    <div class="priority-high">High</div>
+                                    <div class="task-project">Due: Today</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-checkbox">
+                                    </div>
+                                    <div class="task-details">
+                                        <h4>Design app icons</h4>
+                                        <p>Mobile App UI</p>
+                                    </div>
+                                </div>
+                                <div class="task-priority">
+                                    <div class="priority-medium">Medium</div>
+                                    <div class="task-project">Due: Jun 18</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-checkbox">
+                                    </div>
+                                    <div class="task-details">
+                                        <h4>Client presentation</h4>
+                                        <p>Brand Identity</p>
+                                    </div>
+                                </div>
+                                <div class="task-priority">
+                                    <div class="priority-high">High</div>
+                                    <div class="task-project">Due: Jun 20</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-checkbox checked">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="task-details">
+                                        <h4>Research competitors</h4>
+                                        <p>Marketing Campaign</p>
+                                    </div>
+                                </div>
+                                <div class="task-priority">
+                                    <div class="priority-low">Low</div>
+                                    <div class="task-project">Completed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Task checkbox functionality
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.classList.toggle('checked');
+            });
+        });
+
+        window.onload = function() {
+            const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+            const timelineChart = new Chart(timelineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        {
+                            label: 'Projects Completed',
+                            data: [8, 12, 10, 15, 18, 14],
+                            borderColor: '#4895ef',
+                            backgroundColor: 'rgba(72, 149, 239, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'New Projects',
+                            data: [5, 8, 12, 10, 15, 18],
+                            borderColor: '#f8961e',
+                            backgroundColor: 'rgba(248, 150, 30, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            const projectCtx = document.getElementById('projectChart').getContext('2d');
+            const projectChart = new Chart(projectCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Web Design', 'App Development', 'Branding', 'Marketing'],
+                    datasets: [{
+                        data: [35, 25, 20, 20],
+                        backgroundColor: [
+                            '#4895ef',
+                            '#4cc9f0',
+                            '#f8961e',
+                            '#f72585'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
