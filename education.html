@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education Dashboard</title>
+    <title>Creative Studio Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary: #4cc9f0;
-            --secondary: #3a9fc5;
+            --primary: #4895ef;
+            --secondary: #3a7bc8;
             --success: #4cc9f0;
             --danger: #f72585;
             --warning: #f8961e;
-            --info: #4895ef;
             --light: #f8f9fa;
             --dark: #212529;
             --gray: #6c757d;
@@ -215,7 +214,7 @@
             justify-content: center;
             margin: 0 auto 15px;
             font-size: 1.5rem;
-            background-color: rgba(76, 201, 240, 0.1);
+            background-color: rgba(72, 149, 239, 0.1);
             color: var(--primary);
         }
 
@@ -235,7 +234,7 @@
             position: relative;
         }
 
-        .course-item {
+        .project-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -243,52 +242,47 @@
             border-bottom: 1px solid #f0f0f0;
         }
 
-        .course-item:last-child {
+        .project-item:last-child {
             border-bottom: none;
         }
 
-        .course-info {
+        .project-info {
             display: flex;
             align-items: center;
         }
 
-        .course-icon {
-            width: 40px;
-            height: 40px;
+        .project-color {
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin-right: 15px;
-            background-color: rgba(76, 201, 240, 0.1);
-            color: var(--primary);
         }
 
-        .course-details h4 {
+        .project-details h4 {
             font-weight: 500;
             margin-bottom: 5px;
         }
 
-        .course-details p {
+        .project-details p {
             color: var(--gray);
             font-size: 0.8rem;
         }
 
-        .course-progress {
+        .project-stats {
             text-align: right;
         }
 
-        .course-percentage {
+        .project-deadline {
             font-weight: 600;
             color: var(--primary);
         }
 
-        .course-status {
+        .project-status {
             font-size: 0.8rem;
             color: var(--gray);
         }
 
-        .assignment-item {
+        .task-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -296,30 +290,63 @@
             border-bottom: 1px solid #f0f0f0;
         }
 
-        .assignment-item:last-child {
+        .task-item:last-child {
             border-bottom: none;
         }
 
-        .assignment-info h4 {
+        .task-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 4px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .task-checkbox.checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .task-details h4 {
             font-weight: 500;
             margin-bottom: 5px;
         }
 
-        .assignment-info p {
+        .task-details p {
             color: var(--gray);
             font-size: 0.8rem;
         }
 
-        .assignment-due {
+        .task-priority {
             text-align: right;
         }
 
-        .assignment-date {
+        .priority-high {
+            color: #f72585;
             font-weight: 600;
-            color: var(--primary);
         }
 
-        .assignment-course {
+        .priority-medium {
+            color: #f8961e;
+            font-weight: 600;
+        }
+
+        .priority-low {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+
+        .task-project {
             font-size: 0.8rem;
             color: var(--gray);
         }
@@ -380,7 +407,7 @@
     <div class="container">
         <div class="sidebar">
             <div class="sidebar-header">
-                <h2>Education</h2>
+                <h2>Creative Studio</h2>
             </div>
             <div class="sidebar-menu">
                 <div class="sidebar-item active">
@@ -388,20 +415,20 @@
                     <span>Dashboard</span>
                 </div>
                 <div class="sidebar-item">
-                    <i class="fas fa-book"></i>
-                    <span>Courses</span>
+                    <i class="fas fa-palette"></i>
+                    <span>Projects</span>
                 </div>
                 <div class="sidebar-item">
                     <i class="fas fa-tasks"></i>
-                    <span>Assignments</span>
+                    <span>Tasks</span>
                 </div>
                 <div class="sidebar-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Progress</span>
+                    <i class="fas fa-users"></i>
+                    <span>Team</span>
                 </div>
                 <div class="sidebar-item">
-                    <i class="fas fa-calendar"></i>
-                    <span>Schedule</span>
+                    <i class="fas fa-file-alt"></i>
+                    <span>Assets</span>
                 </div>
                 <div class="sidebar-item">
                     <i class="fas fa-cog"></i>
@@ -419,7 +446,7 @@
                     <a href="index.html" class="back-btn">
                         <i class="fas fa-arrow-left"></i> Back to Dashboards
                     </a>
-                    <h1>Education Dashboard</h1>
+                    <h1>Creative Studio Dashboard</h1>
                 </div>
                 <div class="header-right">
                     <div class="user-profile">
@@ -433,89 +460,52 @@
                 <div class="dashboard-grid">
                     <div class="card stat-card">
                         <div class="stat-icon">
-                            <i class="fas fa-book"></i>
+                            <i class="fas fa-palette"></i>
                         </div>
-                        <div class="stat-value">6</div>
-                        <div class="stat-label">Active Courses</div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">Active Projects</div>
                     </div>
                     <div class="card stat-card">
                         <div class="stat-icon">
                             <i class="fas fa-tasks"></i>
                         </div>
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">Pending Assignments</div>
-                    </div>
-                    <div class="card stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="stat-value">87%</div>
-                        <div class="stat-label">Average Grade</div>
+                        <div class="stat-value">42</div>
+                        <div class="stat-label">Tasks This Week</div>
                     </div>
                     <div class="card stat-card">
                         <div class="stat-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <div class="stat-value">24h</div>
-                        <div class="stat-label">Study Time This Week</div>
+                        <div class="stat-value">78%</div>
+                        <div class="stat-label">On Time Delivery</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Team Members</div>
                     </div>
                 </div>
 
                 <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr; margin-top: 30px;">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Course Progress</div>
+                            <div class="card-title">Project Timeline</div>
                         </div>
                         <div class="card-body">
                             <div class="chart-container">
-                                <canvas id="progressChart"></canvas>
+                                <canvas id="timelineChart"></canvas>
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Upcoming Deadlines</div>
+                            <div class="card-title">Project Distribution</div>
                         </div>
                         <div class="card-body">
-                            <div class="assignment-item">
-                                <div class="assignment-info">
-                                    <h4>Research Paper</h4>
-                                    <p>History 101</p>
-                                </div>
-                                <div class="assignment-due">
-                                    <div class="assignment-date">Jun 18</div>
-                                    <div class="assignment-course">2 days left</div>
-                                </div>
-                            </div>
-                            <div class="assignment-item">
-                                <div class="assignment-info">
-                                    <h4>Math Problem Set</h4>
-                                    <p>Calculus II</p>
-                                </div>
-                                <div class="assignment-due">
-                                    <div class="assignment-date">Jun 20</div>
-                                    <div class="assignment-course">4 days left</div>
-                                </div>
-                            </div>
-                            <div class="assignment-item">
-                                <div class="assignment-info">
-                                    <h4>Programming Project</h4>
-                                    <p>Computer Science</p>
-                                </div>
-                                <div class="assignment-due">
-                                    <div class="assignment-date">Jun 25</div>
-                                    <div class="assignment-course">9 days left</div>
-                                </div>
-                            </div>
-                            <div class="assignment-item">
-                                <div class="assignment-info">
-                                    <h4>Lab Report</h4>
-                                    <p>Chemistry</p>
-                                </div>
-                                <div class="assignment-due">
-                                    <div class="assignment-date">Jun 28</div>
-                                    <div class="assignment-course">12 days left</div>
-                                </div>
+                            <div class="chart-container">
+                                <canvas id="projectChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -524,14 +514,205 @@
                 <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; margin-top: 30px;">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">My Courses</div>
+                            <div class="card-title">Active Projects</div>
                         </div>
                         <div class="card-body">
-                            <div class="course-item">
-                                <div class="course-info">
-                                    <div class="course-icon">
-                                        <i class="fas fa-calculator"></i>
+                            <div class="project-item">
+                                <div class="project-info">
+                                    <div class="project-color" style="background-color: #4895ef;"></div>
+                                    <div class="project-details">
+                                        <h4>Website Redesign</h4>
+                                        <p>Client: TechCorp Inc.</p>
                                     </div>
-                                    <div class="course-details">
-                                        <h4>Calculus II</h4>
-                                        <p>Prof
+                                </div>
+                                <div class="project-stats">
+                                    <div class="project-deadline">Jun 25</div>
+                                    <div class="project-status">Design Phase</div>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-info">
+                                    <div class="project-color" style="background-color: #4cc9f0;"></div>
+                                    <div class="project-details">
+                                        <h4>Mobile App UI</h4>
+                                        <p>Client: StartupXYZ</p>
+                                    </div>
+                                </div>
+                                <div class="project-stats">
+                                    <div class="project-deadline">Jul 5</div>
+                                    <div class="project-status">Development</div>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-info">
+                                    <div class="project-color" style="background-color: #f8961e;"></div>
+                                    <div class="project-details">
+                                        <h4>Brand Identity</h4>
+                                        <p>Client: FreshFoods</p>
+                                    </div>
+                                </div>
+                                <div class="project-stats">
+                                    <div class="project-deadline">Jun 30</div>
+                                    <div class="project-status">Review</div>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <div class="project-info">
+                                    <div class="project-color" style="background-color: #f72585;"></div>
+                                    <div class="project-details">
+                                        <h4>Marketing Campaign</h4>
+                                        <p>Client: GlobalTech</p>
+                                    </div>
+                                </div>
+                                <div class="project-stats">
+                                    <div class="project-deadline">Jul 15</div>
+                                    <div class="project-status">Planning</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">My Tasks</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-checkbox checked">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="task-details">
+                                        <h4>Create homepage mockup</h4>
+                                        <p>Website Redesign</p>
+                                    </div>
+                                </div>
+                                <div class="task-priority">
+                                    <div class="priority-high">High</div>
+                                    <div class="task-project">Due: Today</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-checkbox">
+                                    </div>
+                                    <div class="task-details">
+                                        <h4>Design app icons</h4>
+                                        <p>Mobile App UI</p>
+                                    </div>
+                                </div>
+                                <div class="task-priority">
+                                    <div class="priority-medium">Medium</div>
+                                    <div class="task-project">Due: Jun 18</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-checkbox">
+                                    </div>
+                                    <div class="task-details">
+                                        <h4>Client presentation</h4>
+                                        <p>Brand Identity</p>
+                                    </div>
+                                </div>
+                                <div class="task-priority">
+                                    <div class="priority-high">High</div>
+                                    <div class="task-project">Due: Jun 20</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-checkbox checked">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="task-details">
+                                        <h4>Research competitors</h4>
+                                        <p>Marketing Campaign</p>
+                                    </div>
+                                </div>
+                                <div class="task-priority">
+                                    <div class="priority-low">Low</div>
+                                    <div class="task-project">Completed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Task checkbox functionality
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.classList.toggle('checked');
+            });
+        });
+
+        window.onload = function() {
+            const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+            const timelineChart = new Chart(timelineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        {
+                            label: 'Projects Completed',
+                            data: [8, 12, 10, 15, 18, 14],
+                            borderColor: '#4895ef',
+                            backgroundColor: 'rgba(72, 149, 239, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'New Projects',
+                            data: [5, 8, 12, 10, 15, 18],
+                            borderColor: '#f8961e',
+                            backgroundColor: 'rgba(248, 150, 30, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            const projectCtx = document.getElementById('projectChart').getContext('2d');
+            const projectChart = new Chart(projectCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Web Design', 'App Development', 'Branding', 'Marketing'],
+                    datasets: [{
+                        data: [35, 25, 20, 20],
+                        backgroundColor: [
+                            '#4895ef',
+                            '#4cc9f0',
+                            '#f8961e',
+                            '#f72585'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
