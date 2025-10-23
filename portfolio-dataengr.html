@@ -1,1 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Engineer Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s, color 0.4s;
+    }
+    :root {
+      --bg: #f7f9fc;
+      --text: #111;
+      --accent: #0077ff;
+      --card-bg: #fff;
+      --border: #e3e7ed;
+    }
+    .dark {
+      --bg: #0d1117;
+      --text: #e6edf3;
+      --accent: #1f6feb;
+      --card-bg: #161b22;
+      --border: #30363d;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--card-bg);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+
+    button.toggle {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, var(--accent), #00c6ff);
+      color: #fff;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    section {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2.section-title {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .skills ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .skills li {
+      margin: 0.6rem 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .skills span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 400px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1rem;
+      color: var(--text);
+      margin-top: 2rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .project-desc {
+      color: var(--text);
+      opacity: 0.8;
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Data Engineer</h1>
+    <button class="toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+  </header>
+
+  <section class="hero">
+    <h2>Hi, I'm Sophia!</h2>
+    <p>I design, build, and optimize data pipelines and architectures that power data-driven products.</p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Core Skills</h2>
+    <div class="grid skills">
+      <div class="card">
+        <ul>
+          <li>Python <span>Expert</span></li>
+          <li>SQL / PostgreSQL <span>Advanced</span></li>
+          <li>ETL / Airflow <span>Advanced</span></li>
+          <li>Data Modeling <span>Advanced</span></li>
+          <li>Big Data (Spark, Hadoop) <span>Intermediate</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <canvas id="skillsChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Real-Time Data Pipeline</h3>
+        <p class="project-desc">Built a Kafka + Spark pipeline for streaming analytics at scale, integrating with AWS S3 and Redshift.</p>
+      </div>
+      <div class="card">
+        <h3>ETL Automation System</h3>
+        <p class="project-desc">Developed a robust ETL system using Airflow and Python to automate 50+ daily data workflows.</p>
+      </div>
+      <div class="card">
+        <h3>Data Lakehouse Migration</h3>
+        <p class="project-desc">Led migration from traditional DWH to Databricks Lakehouse for unified batch & streaming data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Contact</h2>
+    <p style="text-align:center;">📧 Email: <a href="mailto:sophia.data@example.com">sophia.data@example.com</a></p>
+    <p style="text-align:center;">💼 LinkedIn: <a href="#">linkedin.com/in/sophiadata</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Sophia | Data Engineer Portfolio</p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const body = document.body;
+    function toggleTheme() {
+      body.classList.toggle('dark');
+      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
+    if (localStorage.getItem('theme') === 'dark') body.classList.add('dark');
+
+    // Skill Chart
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Python', 'SQL', 'Airflow', 'Spark', 'Modeling'],
+        datasets: [{
+          label: 'Skill Level',
+          data: [95, 90, 85, 70, 88],
+          backgroundColor: 'rgba(0, 119, 255, 0.7)',
+          borderRadius: 6,
+        }]
+      },
+      options: {
+        scales: { y: { beginAtZero: true, ticks: { color: 'var(--text)' }, grid: { color: 'var(--border)' } },
+                  x: { ticks: { color: 'var(--text)' }, grid: { color: 'var(--border)' } } },
+        plugins: { legend: { display: false } },
+        responsive: true
+      }
+    });
+  </script>
+</body>
+</html>
 
