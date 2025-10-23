@@ -1,1 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Frontend Developer — Portfolio</title>
+
+<!-- Chart.js for skill chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-somehash" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+  :root{
+    --bg-light:#f7f9fc;
+    --bg-dark:#0b1220;
+    --card-light:#ffffff;
+    --card-dark:#071028;
+    --text-light:#0b1220;
+    --text-dark:#e6eef6;
+    --accent:#06b6d4;
+    --accent-2:#7c3aed;
+    --radius:14px;
+    --glass: rgba(255,255,255,0.04);
+    --mono: 'SFMono-Regular', ui-monospace, Menlo, Monaco, 'Roboto Mono', monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg-light);color:var(--text-light);transition:background .2s,color .2s}
+  body.dark{background:var(--bg-dark);color:var(--text-dark)}
+  a{color:inherit}
+  .container{max-width:1100px;margin:28px auto;padding:20px;display:grid;grid-template-columns:320px 1fr;gap:24px}
+  /* SIDEBAR */
+  .sidebar{background:var(--card-light);padding:20px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(2,6,23,0.06)}
+  body.dark .sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+  .avatar{height:96px;width:96px;border-radius:12px;object-fit:cover;display:block;margin-bottom:12px}
+  h1.logo{margin:0;font-size:20px}
+  .role{margin-top:6px;color:gray;font-size:13px}
+  .contact{margin-top:18px;font-size:14px}
+  .contact div{margin:8px 0}
+  .btn{display:inline-flex;gap:8px;align-items:center;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:0;cursor:pointer}
+  .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(0,0,0,0.06)}
+  .skill-list{margin-top:18px;display:grid;gap:10px}
+  .skill-item{display:flex;justify-content:space-between;align-items:center}
+  .small{font-size:13px;color:gray}
+  /* MAIN */
+  .main{padding:0 6px}
+  .hero{background:linear-gradient(180deg, rgba(12,32,64,0.02), transparent);padding:18px;border-radius:var(--radius);display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .hero .intro{max-width:64%}
+  .hero h2{margin:0;font-size:24px}
+  .hero p{margin:6px 0;color:gray}
+  .actions{display:flex;gap:10px;margin-top:12px}
+  .projects{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .project{background:var(--card-light);padding:12px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.04);overflow:hidden;display:flex;flex-direction:column}
+  .project img{height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px}
+  .project h4{margin:0 0 6px 0;font-size:16px}
+  .project p{margin:0;color:gray;font-size:13px}
+  .section{margin-top:22px}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px}
+  .card{background:var(--card-light);padding:14px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.04)}
+  body.dark .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+  /* footer contact */
+  .contact-form{display:grid;gap:10px}
+  input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent}
+  textarea{min-height:120px;resize:vertical}
+  .footer{margin-top:28px;font-size:13px;color:gray}
+  /* responsive */
+  @media (max-width:980px){.container{grid-template-columns:1fr;}}
+  /* theme small adjustments */
+  body.dark .small{color:#9aa4b2}
+  body.dark .role{color:#9aa4b2}
+  body.dark .contact{color:#d1d7e0}
+</style>
+</head>
+<body>
+  <div style="max-width:1100px;margin:18px auto;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-weight:700">Frontend Portfolio</div>
+      <div class="small">— interactive UI & SPA</div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button id="downloadResume" class="btn secondary"><i class="fa fa-download"></i> Resume</button>
+      <button id="themeToggle" class="btn"><i class="fa fa-moon"></i> Theme</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <img class="avatar" src="https://images.unsplash.com/photo-1545996124-1f4c5e7b0b5a?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="avatar" />
+      <h1 class="logo">Alex Rivers</h1>
+      <div class="role">Frontend Developer — React / TypeScript / UI</div>
+
+      <div class="section">
+        <div style="display:flex;gap:8px">
+          <button class="btn" onclick="scrollToSection('projects')"><i class="fa fa-code"></i> Projects</button>
+          <button class="btn secondary" onclick="scrollToSection('contact')"><i class="fa fa-envelope"></i> Contact</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="small">Contact</div>
+        <div class="contact">
+          <div><i class="fa fa-envelope"></i> alex@frontend.dev</div>
+          <div><i class="fa fa-phone"></i> +1 (555) 123-4567</div>
+          <div><i class="fa fa-map-pin"></i> Lagos, NG</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="small">Skill Highlights</div>
+        <div class="skill-list">
+          <div class="skill-item"><div>React</div><div class="small">Expert</div></div>
+          <div class="skill-item"><div>TypeScript</div><div class="small">Advanced</div></div>
+          <div class="skill-item"><div>CSS / Animations</div><div class="small">Advanced</div></div>
+          <div class="skill-item"><div>Accessibility</div><div class="small">Intermediate</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="small">Tools</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+          <div class="small" style="background:var(--glass);padding:6px 8px;border-radius:8px">Figma</div>
+          <div class="small" style="background:var(--glass);padding:6px 8px;border-radius:8px">Vite</div>
+          <div class="small" style="background:var(--glass);padding:6px 8px;border-radius:8px">Storybook</div>
+          <div class="small" style="background:var(--glass);padding:6px 8px;border-radius:8px">Cypress</div>
+        </div>
+      </div>
+
+      <div class="footer">Available for hire • Open to remote roles</div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <section class="hero card">
+        <div class="intro">
+          <h2>Hi — I'm Alex, a Frontend Developer crafting fast and accessible web apps.</h2>
+          <p>I build delightful UI with React, TypeScript and modern CSS. I focus on performance, accessibility and great developer experience.</p>
+          <div class="actions">
+            <button class="btn" onclick="scrollToSection('projects')"><i class="fa fa-rocket"></i> View Work</button>
+            <a class="btn secondary" href="#contact">Hire me</a>
+          </div>
+        </div>
+        <div style="width:280px">
+          <div class="card" style="padding:12px">
+            <div class="small">Skill Score</div>
+            <canvas id="skillChart" height="160"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <h3 style="margin:0 0 10px 0">Selected Projects</h3>
+        <div class="projects">
+          <article class="project">
+            <img src="https://images.unsplash.com/photo-1553440562-8a9f3186d27a?q=80&w=800&auto=format&fit=crop&s=placeholder" alt="project"/>
+            <h4>Design System — UI Kit</h4>
+            <p>Built a reusable component library with Storybook, enabling consistent interfaces across apps.</p>
+            <div style="margin-top:auto;display:flex;gap:8px">
+              <a class="btn secondary" href="#" target="_blank">Live</a>
+              <a class="btn" href="#" target="_blank">Code</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=800&auto=format&fit=crop&s=placeholder" alt="project"/>
+            <h4>Performance Dashboard</h4>
+            <p>Interactive analytics UI using Chart.js and WebSocket-driven live updates.</p>
+            <div style="margin-top:auto;display:flex;gap:8px">
+              <a class="btn secondary" href="#" target="_blank">Live</a>
+              <a class="btn" href="#" target="_blank">Code</a>
+            </div>
+          </article>
+
+          <article class="project">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop&s=placeholder" alt="project"/>
+            <h4>eCommerce SPA</h4>
+            <p>Fast client-side-store with SSR-friendly routes and accessible components.</p>
+            <div style="margin-top:auto;display:flex;gap:8px">
+              <a class="btn secondary" href="#" target="_blank">Live</a>
+              <a class="btn" href="#" target="_blank">Case study</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Experience</h3>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div class="card" style="flex:1">
+            <strong>Senior Frontend Engineer</strong>
+            <div class="small">Acme Corp • 2022 — Present</div>
+            <p class="small">Led frontend initiatives, migrated monolith to micro-frontends and improved performance by 38%.</p>
+          </div>
+          <div class="card" style="flex:1">
+            <strong>Frontend Engineer</strong>
+            <div class="small">StartupX • 2019 — 2022</div>
+            <p class="small">Built the customer-facing app and improved accessibility & SEO.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Contact</h3>
+        <div id="contact" class="card">
+          <form id="contactForm" class="contact-form" onsubmit="return handleSubmit(event)">
+            <input name="name" placeholder="Your name" required/>
+            <input name="email" type="email" placeholder="Email" required/>
+            <textarea name="message" placeholder="Tell me about your project" required></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="btn" type="submit">Send</button>
+              <button type="button" class="btn secondary" onclick="downloadResume()">Download Resume</button>
+            </div>
+            <div id="formMsg" class="small" style="margin-top:8px"></div>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+<script>
+  // Theme toggle (page-local)
+  const themeKey = 'theme_frontend';
+  const root = document.body;
+  const btn = document.getElementById('themeToggle');
+  const init = localStorage.getItem(themeKey) || 'dark';
+  root.classList.toggle('dark', init === 'dark');
+
+  function toggleTheme(){
+    const next = root.classList.contains('dark') ? 'light' : 'dark';
+    root.classList.toggle('dark');
+    localStorage.setItem(themeKey, next);
+  }
+  btn.addEventListener('click', toggleTheme);
+
+  // skill chart
+  const skillCtx = document.getElementById('skillChart').getContext('2d');
+  const skillChart = new Chart(skillCtx, {
+    type:'radar',
+    data:{
+      labels:['React','TypeScript','HTML/CSS','Performance','Accessibility'],
+      datasets:[{
+        label:'Skill level',
+        data:[90,85,95,78,72],
+        backgroundColor:'rgba(6,182,212,0.12)',
+        borderColor:'#06b6d4',
+        pointBackgroundColor:'#06b6d4'
+      }]
+    },
+    options:{scales:{r:{beginAtZero:true,suggestedMax:100}}}
+  });
+
+  // contact form placeholder
+  function handleSubmit(e){
+    e.preventDefault();
+    const f = e.target;
+    document.getElementById('formMsg').textContent = 'Thanks! I will get back to you soon.';
+    f.reset();
+    return false;
+  }
+
+  // fake resume download (example)
+  function downloadResume(){
+    const blob = new Blob(["Resume: Alex Rivers\\nFrontend Developer\\nExperience..."], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'Alex-Rivers-Resume.txt'; a.click(); URL.revokeObjectURL(url);
+  }
+  document.getElementById('downloadResume').addEventListener('click', downloadResume);
+
+  function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  }
+</script>
+</body>
+</html>
 
