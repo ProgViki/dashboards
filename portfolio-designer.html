@@ -1,1 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Aurora Design Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0e6a00c.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --primary: #ff4d6d;
+      --secondary: #6c63ff;
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --card: #f5f5f5;
+    }
+    [data-theme="dark"] {
+      --bg: #1a1a1a;
+      --text: #f5f5f5;
+      --card: #2a2a2a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--bg);
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    nav a {
+      margin: 0 1rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--primary);
+    }
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      color: #fff;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+    }
+    .hero p {
+      margin: 1rem 0;
+      font-size: 1.2rem;
+      max-width: 500px;
+    }
+    .hero button {
+      background: #fff;
+      color: var(--primary);
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .hero button:hover {
+      transform: translateY(-3px);
+    }
+
+    /* About */
+    section {
+      padding: 5rem 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .about {
+      text-align: center;
+    }
+    .about img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Experience */
+    .timeline {
+      position: relative;
+      margin-top: 3rem;
+      padding-left: 2rem;
+      border-left: 3px solid var(--primary);
+    }
+    .timeline-item {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -11px;
+      top: 5px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+    .timeline-item h3 {
+      margin-bottom: 0.3rem;
+      color: var(--primary);
+    }
+
+    /* Contact */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    input, textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+    }
+    button {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .lightbox img {
+      width: 80%;
+      max-width: 800px;
+      border-radius: 10px;
+    }
+
+    @media(max-width:768px){
+      header { padding: 1rem; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Aurora Design</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>I'm Aurora Lee</h1>
+      <p>Creative Designer crafting immersive brand and digital experiences through color, motion, and emotion.</p>
+      <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Let's Collaborate</button>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <img src="https://images.unsplash.com/photo-1614289423727-b1d61b1a8c2c?auto=format&fit=crop&w=200&q=80" alt="Aurora Lee">
+    <h2>About Me</h2>
+    <p>I am a multidisciplinary designer specializing in UI/UX, branding, and creative storytelling. I believe design is not just about visuals—it's about how people feel and connect with a brand. Every color, shape, and interaction has meaning.</p>
+  </section>
+
+  <section id="work">
+    <h2 style="text-align:center;">Featured Work</h2>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1606813902781-048f6d9f86ab?auto=format&fit=crop&w=600&q=80" alt="Design 1">
+      <img src="https://images.unsplash.com/photo-1611095564989-73184e95d5f4?auto=format&fit=crop&w=600&q=80" alt="Design 2">
+      <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="Design 3">
+      <img src="https://images.unsplash.com/photo-1616469829581-5bb4f0f9e4b7?auto=format&fit=crop&w=600&q=80" alt="Design 4">
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 style="text-align:center;">Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Lead Designer - VisionLab Studio</h3>
+        <p><strong>2022 - Present</strong> | Leading design direction for major clients including lifestyle and tech brands.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>UI/UX Designer - Neon Digital</h3>
+        <p><strong>2019 - 2022</strong> | Crafted user-centered design systems and award-winning interfaces.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Brand Designer - Creative Hive</h3>
+        <p><strong>2016 - 2019</strong> | Built brand identities and visuals for 25+ startups and small businesses.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 style="text-align:center;">Get in Touch</h2>
+    <form>
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 Aurora Lee | Designed with passion 💫
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Preview">
+  </div>
+
+  <script>
+    // Theme Toggle
+    const themeBtn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    themeBtn.innerHTML = currentTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    themeBtn.onclick = () => {
+      const theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    };
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.onclick = () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+      };
+    });
+    lightbox.onclick = () => { lightbox.style.display = 'none'; };
+
+    // Contact Form
+    document.querySelector('form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Message sent successfully!');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
 
