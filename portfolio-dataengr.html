@@ -14,7 +14,9 @@
       background: var(--bg);
       color: var(--text);
       transition: background 0.4s, color 0.4s;
+      scroll-behavior: smooth;
     }
+
     :root {
       --bg: #f7f9fc;
       --text: #111;
@@ -22,6 +24,7 @@
       --card-bg: #fff;
       --border: #e3e7ed;
     }
+
     .dark {
       --bg: #0d1117;
       --text: #e6edf3;
@@ -75,7 +78,7 @@
     }
 
     section {
-      padding: 3rem 2rem;
+      padding: 3rem 1rem;
       max-width: 1000px;
       margin: auto;
     }
@@ -102,25 +105,11 @@
       transition: transform 0.3s;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
+    .card:hover { transform: translateY(-5px); }
 
-    .skills ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .skills li {
-      margin: 0.6rem 0;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .skills span {
-      color: var(--accent);
-      font-weight: 600;
-    }
+    .skills ul { list-style: none; padding-left: 0; }
+    .skills li { margin: 0.6rem 0; display: flex; justify-content: space-between; }
+    .skills span { color: var(--accent); font-weight: 600; }
 
     canvas {
       width: 100%;
@@ -129,6 +118,99 @@
       display: block;
     }
 
+    /* EXPERIENCE TIMELINE */
+    .timeline {
+      position: relative;
+      margin: 2rem 0;
+      padding-left: 30px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .timeline-item {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 0;
+      width: 15px;
+      height: 15px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .timeline-item h3 {
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-item p {
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    /* CONTACT FORM */
+    .footer{
+        display: flex;
+        /* justify-content: space-around; */
+        align-items: center;
+        gap: 60px;
+        /* padding: 2rem; */
+        /* background: var(--card-bg); */
+        /* border: 1px solid var(--border); */
+        /* border-radius: 12px; */
+        /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
+    }
+
+    .contacts{
+        width: 30%;
+        text-align: left;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+
+    form input:focus, form textarea:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    form button {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form button:hover { background: #005ecc; }
+
     footer {
       background: var(--card-bg);
       border-top: 1px solid var(--border);
@@ -136,18 +218,6 @@
       padding: 1rem;
       color: var(--text);
       margin-top: 2rem;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .project-desc {
-      color: var(--text);
-      opacity: 0.8;
-      font-size: 0.95rem;
-      margin-top: 0.3rem;
     }
   </style>
 </head>
@@ -181,27 +251,60 @@
   </section>
 
   <section>
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Senior Data Engineer - TechFlow Analytics</h3>
+        <p><strong>2022 – Present</strong></p>
+        <p>Architected scalable data pipelines using Airflow, Kafka, and AWS for real-time analytics.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Data Engineer - Nova Systems</h3>
+        <p><strong>2019 – 2022</strong></p>
+        <p>Developed ETL frameworks in Python and SQL to manage terabytes of structured/unstructured data.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Junior Data Analyst - Insight Hub</h3>
+        <p><strong>2017 – 2019</strong></p>
+        <p>Automated data validation scripts and built dashboards to monitor KPIs across departments.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2 class="section-title">Projects</h2>
     <div class="grid">
       <div class="card">
         <h3>Real-Time Data Pipeline</h3>
-        <p class="project-desc">Built a Kafka + Spark pipeline for streaming analytics at scale, integrating with AWS S3 and Redshift.</p>
+        <p>Built a Kafka + Spark pipeline for streaming analytics at scale, integrating with AWS S3 and Redshift.</p>
       </div>
       <div class="card">
         <h3>ETL Automation System</h3>
-        <p class="project-desc">Developed a robust ETL system using Airflow and Python to automate 50+ daily data workflows.</p>
+        <p>Developed a robust ETL system using Airflow and Python to automate 50+ daily data workflows.</p>
       </div>
       <div class="card">
         <h3>Data Lakehouse Migration</h3>
-        <p class="project-desc">Led migration from traditional DWH to Databricks Lakehouse for unified batch & streaming data.</p>
+        <p>Led migration from traditional DWH to Databricks Lakehouse for unified batch & streaming data.</p>
       </div>
     </div>
   </section>
 
   <section>
     <h2 class="section-title">Contact</h2>
-    <p style="text-align:center;">📧 Email: <a href="mailto:sophia.data@example.com">sophia.data@example.com</a></p>
-    <p style="text-align:center;">💼 LinkedIn: <a href="#">linkedin.com/in/sophiadata</a></p>
+    <div class="footer">
+        <div class="contacts">
+            <p style="text-align:left;">📧 Email: <a href="mailto:sophia.data@example.com">sophia.data@example.com</a></p>
+            <p style="text-align:left;">💼 LinkedIn: <a href="#">linkedin.com/in/sophiadata</a></p>
+            <p style="text-align:left;">📞 Phone: <a href="tel:+1234567890">(123) 456-7890</a></p>
+            <p style="text-align:left;">📍 Location: San Francisco, CA</p>
+        </div>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    </div>
   </section>
 
   <footer>
@@ -231,13 +334,29 @@
         }]
       },
       options: {
-        scales: { y: { beginAtZero: true, ticks: { color: 'var(--text)' }, grid: { color: 'var(--border)' } },
-                  x: { ticks: { color: 'var(--text)' }, grid: { color: 'var(--border)' } } },
+        scales: {
+          y: { beginAtZero: true, ticks: { color: 'var(--text)' }, grid: { color: 'var(--border)' } },
+          x: { ticks: { color: 'var(--text)' }, grid: { color: 'var(--border)' } }
+        },
         plugins: { legend: { display: false } },
         responsive: true
       }
     });
+
+    // Contact Form Validation
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if (!name || !email || !message) {
+        alert('Please fill out all fields.');
+        return;
+      }
+      alert(`Thanks ${name}! Your message has been sent successfully.`);
+      form.reset();
+    });
   </script>
 </body>
 </html>
-
