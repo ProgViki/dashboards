@@ -1,53 +1,150 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nav</title>
+    <title>Sidebar</title>
+    <link rel="stylesheet" href="sidebar.css">
 </head>
 <body>
-    <div class="background">
-        <nav class="menu_wrapper">
-            <div class="menu_bar">
-                <a href="#" title="Logo" class="logo">
-                    <img src="" alt="logo">
+    <nav class="sidebar">
+        <div class="sidebar-top-wrapper">
+            <div class="sidebar-top">
+                <a class="logo_wrapper" href="#">
+                    <img src="assets/logo.png" alt="logo" class="logo-small">
+                    <div class="sidebar-top_company">
+                        <span class="company-name">Mercedes</span>
+                        <span class="company-members">6.3k Members</span>
+                    </div>
                 </a>
-                <ul class="navigation hide">
-                    <li>
-                        <button>Product</button>
-                        <div class="dropdown">
-                            <ul class="list-items">
-                                <li>
-                                    <div class="item-title">
-                                        <h3>Actions</h3>
-                                        <p>Automate any workflow</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-title">
-                                        <h3>Actions</h3>
-                                        <p>Automate any workflow</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-title">
-                                        <h3>Actions</h3>
-                                        <p>Automate any workflow</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+            </div>
+            <button class="expand-btn" type="button">
+            <!-- expand button -->
+            </button>
+        </div>
+
+        <div class="search_wrapper">
+            <!-- search icon -->
+            <input type="text" class="search_input" placeholder="Search..." aria-labelledby="search-icon">
+        </div>
+
+
+        <div class="sidebar-links sidebar-links--top">
+                <ul class="sidebar-bottom-list">
+                    <li class="sidebar-bottom-list-item">
+                        <a href="#" class="tooltip" title="Dashboard">
+                            <!-- svg icons -->
+
+                            <span class="link hide">Dashboard</span>
+                            <span class="tooltip_content">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-bottom-list-item">
+                        <a href="#" class="tooltip" title="Trends">
+                            <!-- svg icons -->
+
+                            <span class="link hide">Trends</span>
+                            <span class="tooltip_content">Trends</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-bottom-list-item">
+                        <a href="#" class="tooltip" title="Actiities">
+                            <!-- svg icons -->
+
+                            <span class="link hide">Activities</span>
+                            <span class="tooltip_content">Activities</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-bottom-list-item">
+                        <a href="#" class="tooltip" title="Inbox">
+                            <!-- svg icons -->
+
+                            <span class="link hide">Inbox</span>
+                            <span class="tooltip_content">Inbox</span>
+                        </a>
+                    </li>
+                </ul>            
+        </div>
+
+        <div class="separator"></div>
+        <div class="sidebar-links sidebar-links--bottom">
+                <ul class="sidebar-bottom-list">
+                    <li class="sidebar-bottom-list-item">
+                        <a href="#" class="tooltip" title="Home">
+                            <!-- svg icons -->
+
+                            <span class="link hide">Home</span>
+                            <span class="tooltip_content">Home</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-bottom-list-item">
+                        <a href="#" class="tooltip" title="City">
+                            <!-- svg icons -->
+
+                            <span class="link hide">City</span>
+                            <span class="tooltip_content">City</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-bottom-list-item">
+                        <a href="#" class="tooltip" title="Business">
+                            <!-- svg icons -->
+
+                            <span class="link hide">Business</span>
+                            <span class="tooltip_content">Business</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-bottom-list-item">
+                        <a href="#" class="tooltip" title="Add Route">
+                            <!-- svg icons -->
+
+                            <span class="link hide">Add Route</span>
+                            <span class="tooltip_content">Add Route</span>
+                        </a>
                     </li>
                 </ul>
-            </div>
-            <div class="action-buttons">
-                <a href="#sign-in" title="Sign in" class="secondary hide">Sign in</a>
-                <a href="#sign-up" title="Sign up" class="secondary hide">Sign up</a>
+        </div>
 
-            </div>
-            <button class="burger-menu"></button>
-        </nav>
+        <div class="separator"></div>
+        <div class="sidebar-links sidebar-links--bottom">
+            <ul class="sidebar-bottom-list">
+                <li class="sidebar-bottom-list-item">
+                    <a href="#" class="tooltip" title="Settings">
+                        <!-- svg icons -->
+
+                        <span class="link hide">Settings</span>
+                        <span class="tooltip_content">Settings</span>
+                    </a>
+                </li>
+                <li class="sidebar-bottom-list-item">
+                    <a href="#" class="tooltip" title="Support">
+                        <!-- svg icons -->
+
+                        <span class="link hide">Support</span>
+                        <span class="tooltip_content">Support</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
+
+        
+
+    <div class="separator"></div>
+    <div class="sidebar_profile">
+        <div class="avatar_wrapper">
+            <img src="assets/viki.jpg" alt="Viki Picture" class="avatar">
+            <div class="online_status"></div>
+        </div>
+        <div class="avatar_name hide">
+            <span class="user-name">John Doe</span>
+            <span class="email">vikistrings@gmil.com</span>
+        </div>
+        <button class="profile-menu-button" type="button">
+            <!-- profile button icon -->
+        </button>
+    </div>
+    </nav>
+
+    <script src="sidebar.js"></script>
 </body>
 </html>
