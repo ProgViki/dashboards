@@ -1,53 +1,103 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nav</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern UI – Modal & Drawer</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-    <div class="background">
-        <nav class="menu_wrapper">
-            <div class="menu_bar">
-                <a href="#" title="Logo" class="logo">
-                    <img src="" alt="logo">
-                </a>
-                <ul class="navigation hide">
-                    <li>
-                        <button>Product</button>
-                        <div class="dropdown">
-                            <ul class="list-items">
-                                <li>
-                                    <div class="item-title">
-                                        <h3>Actions</h3>
-                                        <p>Automate any workflow</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-title">
-                                        <h3>Actions</h3>
-                                        <p>Automate any workflow</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-title">
-                                        <h3>Actions</h3>
-                                        <p>Automate any workflow</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="action-buttons">
-                <a href="#sign-in" title="Sign in" class="secondary hide">Sign in</a>
-                <a href="#sign-up" title="Sign up" class="secondary hide">Sign up</a>
 
-            </div>
-            <button class="burger-menu"></button>
-        </nav>
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <h2>MyDashboard</h2>
+    <button class="btn" id="openDrawerBtn">Settings</button>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul>
+        <li>Dashboard</li>
+        <li>Users</li>
+        <li>Reports</li>
+        <li>Analytics</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+
+      <section class="page-header">
+        <h1>Dashboard Overview</h1>
+        <button class="btn primary" id="openModalBtn">Create Report</button>
+      </section>
+
+      <!-- Cards -->
+      <section class="cards">
+        <div class="card">
+          <h3>Total Users</h3>
+          <p>1,248</p>
+        </div>
+        <div class="card">
+          <h3>Active Sessions</h3>
+          <p>312</p>
+        </div>
+        <div class="card">
+          <h3>Revenue</h3>
+          <p>$9,430</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2026 MyDashboard. All rights reserved.
+  </footer>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3>Create New Report</h3>
+      <span class="close" id="closeModal">×</span>
     </div>
+
+    <form class="modal-body">
+      <label>Report Name</label>
+      <input type="text" placeholder="Enter report name" />
+
+      <label>Description</label>
+      <textarea placeholder="Optional description"></textarea>
+
+      <button type="submit" class="btn primary">Submit</button>
+    </form>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <h3>Settings</h3>
+      <span class="close" id="closeDrawer">×</span>
+    </div>
+
+    <div class="drawer-body">
+      <p><strong>Theme</strong></p>
+      <button class="btn">Light</button>
+      <button class="btn">Dark</button>
+
+      <p><strong>Notifications</strong></p>
+      <label><input type="checkbox" /> Email Alerts</label>
+      <label><input type="checkbox" /> Push Notifications</label>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
