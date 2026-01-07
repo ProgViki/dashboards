@@ -1,150 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar</title>
-    <link rel="stylesheet" href="sidebar.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern UI – Modal & Drawer</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-    <nav class="sidebar">
-        <div class="sidebar-top-wrapper">
-            <div class="sidebar-top">
-                <a class="logo_wrapper" href="#">
-                    <img src="assets/logo.png" alt="logo" class="logo-small">
-                    <div class="sidebar-top_company">
-                        <span class="company-name">Mercedes</span>
-                        <span class="company-members">6.3k Members</span>
-                    </div>
-                </a>
-            </div>
-            <button class="expand-btn" type="button">
-            <!-- expand button -->
-            </button>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <h2>MyDashboard</h2>
+    <button class="btn" id="openDrawerBtn">Settings</button>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul>
+        <li>Dashboard</li>
+        <li>Users</li>
+        <li>Reports</li>
+        <li>Analytics</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+
+      <section class="page-header">
+        <h1>Dashboard Overview</h1>
+        <button class="btn primary" id="openModalBtn">Create Report</button>
+      </section>
+
+      <!-- Cards -->
+      <section class="cards">
+        <div class="card">
+          <h3>Total Users</h3>
+          <p>1,248</p>
         </div>
-
-        <div class="search_wrapper">
-            <!-- search icon -->
-            <input type="text" class="search_input" placeholder="Search..." aria-labelledby="search-icon">
+        <div class="card">
+          <h3>Active Sessions</h3>
+          <p>312</p>
         </div>
-
-
-        <div class="sidebar-links sidebar-links--top">
-                <ul class="sidebar-bottom-list">
-                    <li class="sidebar-bottom-list-item">
-                        <a href="#" class="tooltip" title="Dashboard">
-                            <!-- svg icons -->
-
-                            <span class="link hide">Dashboard</span>
-                            <span class="tooltip_content">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-bottom-list-item">
-                        <a href="#" class="tooltip" title="Trends">
-                            <!-- svg icons -->
-
-                            <span class="link hide">Trends</span>
-                            <span class="tooltip_content">Trends</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-bottom-list-item">
-                        <a href="#" class="tooltip" title="Actiities">
-                            <!-- svg icons -->
-
-                            <span class="link hide">Activities</span>
-                            <span class="tooltip_content">Activities</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-bottom-list-item">
-                        <a href="#" class="tooltip" title="Inbox">
-                            <!-- svg icons -->
-
-                            <span class="link hide">Inbox</span>
-                            <span class="tooltip_content">Inbox</span>
-                        </a>
-                    </li>
-                </ul>            
+        <div class="card">
+          <h3>Revenue</h3>
+          <p>$9,430</p>
         </div>
+      </section>
 
-        <div class="separator"></div>
-        <div class="sidebar-links sidebar-links--bottom">
-                <ul class="sidebar-bottom-list">
-                    <li class="sidebar-bottom-list-item">
-                        <a href="#" class="tooltip" title="Home">
-                            <!-- svg icons -->
+    </main>
+  </div>
 
-                            <span class="link hide">Home</span>
-                            <span class="tooltip_content">Home</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-bottom-list-item">
-                        <a href="#" class="tooltip" title="City">
-                            <!-- svg icons -->
+  <!-- Footer -->
+  <footer class="footer">
+    © 2026 MyDashboard. All rights reserved.
+  </footer>
 
-                            <span class="link hide">City</span>
-                            <span class="tooltip_content">City</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-bottom-list-item">
-                        <a href="#" class="tooltip" title="Business">
-                            <!-- svg icons -->
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
 
-                            <span class="link hide">Business</span>
-                            <span class="tooltip_content">Business</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-bottom-list-item">
-                        <a href="#" class="tooltip" title="Add Route">
-                            <!-- svg icons -->
-
-                            <span class="link hide">Add Route</span>
-                            <span class="tooltip_content">Add Route</span>
-                        </a>
-                    </li>
-                </ul>
-        </div>
-
-        <div class="separator"></div>
-        <div class="sidebar-links sidebar-links--bottom">
-            <ul class="sidebar-bottom-list">
-                <li class="sidebar-bottom-list-item">
-                    <a href="#" class="tooltip" title="Settings">
-                        <!-- svg icons -->
-
-                        <span class="link hide">Settings</span>
-                        <span class="tooltip_content">Settings</span>
-                    </a>
-                </li>
-                <li class="sidebar-bottom-list-item">
-                    <a href="#" class="tooltip" title="Support">
-                        <!-- svg icons -->
-
-                        <span class="link hide">Support</span>
-                        <span class="tooltip_content">Support</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3>Create New Report</h3>
+      <span class="close" id="closeModal">×</span>
     </div>
 
-        
+    <form class="modal-body">
+      <label>Report Name</label>
+      <input type="text" placeholder="Enter report name" />
 
-    <div class="separator"></div>
-    <div class="sidebar_profile">
-        <div class="avatar_wrapper">
-            <img src="assets/viki.jpg" alt="Viki Picture" class="avatar">
-            <div class="online_status"></div>
-        </div>
-        <div class="avatar_name hide">
-            <span class="user-name">John Doe</span>
-            <span class="email">vikistrings@gmil.com</span>
-        </div>
-        <button class="profile-menu-button" type="button">
-            <!-- profile button icon -->
-        </button>
+      <label>Description</label>
+      <textarea placeholder="Optional description"></textarea>
+
+      <button type="submit" class="btn primary">Submit</button>
+    </form>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <h3>Settings</h3>
+      <span class="close" id="closeDrawer">×</span>
     </div>
-    </nav>
 
-    <script src="sidebar.js"></script>
+    <div class="drawer-body">
+      <p><strong>Theme</strong></p>
+      <button class="btn">Light</button>
+      <button class="btn">Dark</button>
+
+      <p><strong>Notifications</strong></p>
+      <label><input type="checkbox" /> Email Alerts</label>
+      <label><input type="checkbox" /> Push Notifications</label>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
