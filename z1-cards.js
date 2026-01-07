@@ -1,33 +1,29 @@
-const expand_btn = document.querySelector(".expand-btn");
+const modal = document.getElementById("modal");
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
 
-let activeIndex;
+const openModalBtn = document.getElementById("openModalBtn");
+const closeModal = document.getElementById("closeModal");
 
-expand_btn.addEventListener("click", () => {
-    document.body.classList.toggle("collapsed");
+const openDrawerBtn = document.getElementById("openDrawerBtn");
+const closeDrawer = document.getElementById("closeDrawer");
+
+openModalBtn.addEventListener("click", () => {
+  modal.classList.add("active");
+  overlay.classList.add("active");
 });
 
-const current = window.location.href;
-const allLinks = document.querySelectorAll(".sidebar-links a");
-
-allLinks.forEach((elem) => {
-    elem.addEventListener("click", () => {
-        const hrefLinkClick = elem.href;
-
-        allLinks.forEach((linkElem, index) => {
-            if (linkElem.href === hrefLinkClick) {
-                activeIndex = index;
-                console.log("activeIndex", activeIndex);
-                setActiveLink();
-            } else {
-                linkElem.classList.remove("active"); // remove active class from all links
-
-            }
-        });
-    });
+openDrawerBtn.addEventListener("click", () => {
+  drawer.classList.add("active");
+  overlay.classList.add("active");
 });
 
-const searchInput = document.getElementById("search-input");
+function closeAll() {
+  modal.classList.remove("active");
+  drawer.classList.remove("active");
+  overlay.classList.remove("active");
+}
 
-searchInput.addEventListener("input", () => {
-    document.body.classList.remove("collapsed"); // remove collapsed class when search input is focused
-});
+closeModal.addEventListener("click", closeAll);
+closeDrawer.addEventListener("click", closeAll);
+overlay.addEventListener("click", closeAll);
