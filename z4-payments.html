@@ -1,1 +1,1110 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Payment - Claim #CL-2023-001</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1890ff;
+            --primary-dark: #096dd9;
+            --success-color: #52c41a;
+            --warning-color: #faad14;
+            --error-color: #ff4d4f;
+            --border-color: #d9d9d9;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --bg-blue-light: #eff6ff;
+            --bg-yellow-light: #fefce8;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --radius-sm: 4px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .header-title p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .btn-lg {
+            padding: 12px 24px;
+            font-size: 16px;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-text {
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            padding: 4px 8px;
+        }
+
+        .btn-text:hover {
+            background-color: rgba(24, 144, 255, 0.1);
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--bg-primary);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* Tabs Styles */
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .tab:hover {
+            color: var(--primary-color);
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Claim Summary */
+        .claim-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .claim-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .claim-info p {
+            color: var(--text-secondary);
+        }
+
+        .claim-amount {
+            text-align: right;
+        }
+
+        .amount-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--success-color);
+        }
+
+        .amount-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Descriptions (Bank Details) */
+        .descriptions {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .descriptions-item {
+            display: flex;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .descriptions-item:last-child {
+            border-bottom: none;
+        }
+
+        .descriptions-label {
+            width: 200px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .descriptions-value {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .descriptions-value span {
+            font-weight: 500;
+        }
+
+        /* Instructions & Notes */
+        .instructions {
+            background-color: var(--bg-blue-light);
+            border-left: 4px solid var(--primary-color);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+        }
+
+        .instructions h4 {
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .instructions ul {
+            list-style-position: inside;
+            color: #374151;
+        }
+
+        .instructions li {
+            margin-bottom: 4px;
+        }
+
+        .notes {
+            background-color: var(--bg-yellow-light);
+            border-left: 4px solid var(--warning-color);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+        }
+
+        .notes h4 {
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+
+        .notes ul {
+            list-style-position: inside;
+            color: #92400e;
+        }
+
+        .notes li {
+            margin-bottom: 4px;
+        }
+
+        /* Payment Details Box */
+        .payment-details {
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+        }
+
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .payment-row:last-child {
+            border-bottom: none;
+            font-weight: 600;
+        }
+
+        .payment-total {
+            border-top: 2px solid var(--border-color);
+            padding-top: 12px;
+            font-size: 18px;
+        }
+
+        /* Input Styles */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .input-help {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* Payment Status Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+        }
+
+        .timeline-dot.active {
+            background-color: var(--success-color);
+        }
+
+        .timeline-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Loading Spinner */
+        .spinner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Message Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.error {
+            background-color: var(--error-color);
+        }
+
+        .toast.warning {
+            background-color: var(--warning-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .claim-summary {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .claim-amount {
+                text-align: left;
+            }
+            
+            .descriptions-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .descriptions-label {
+                width: 100%;
+            }
+            
+            .tabs-header {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Utilities */
+        .space-y-4 > * + * {
+            margin-top: 16px;
+        }
+
+        .space-y-6 > * + * {
+            margin-top: 24px;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+
+        .mb-4 {
+            margin-bottom: 16px;
+        }
+
+        .mt-1 {
+            margin-top: 4px;
+        }
+
+        .py-8 {
+            padding-top: 32px;
+            padding-bottom: 32px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">
+                <h1>Make Payment - <span id="claim-id">CL-2023-001</span></h1>
+                <p>Process payment for John's claim</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Claims
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State (hidden by default) -->
+        <div id="loading-state" class="hidden">
+            <div class="card">
+                <div class="spinner-container">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State (hidden by default) -->
+        <div id="error-state" class="hidden">
+            <div class="card">
+                <div class="text-center py-8">
+                    <p style="color: var(--error-color); margin-bottom: 16px;">Error loading claim details</p>
+                    <button class="btn btn-primary" id="back-error-btn">Back to Claims</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Not Approved State (hidden by default) -->
+        <div id="not-approved-state" class="hidden">
+            <div class="card">
+                <div class="text-center py-8">
+                    <p style="color: var(--warning-color); margin-bottom: 16px;">This claim is not approved yet. Please approve the claim before making payment.</p>
+                    <button class="btn btn-primary" id="back-claims-btn">Back to Claims</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content">
+            <!-- Claim Summary Card -->
+            <div class="card">
+                <div class="claim-summary">
+                    <div class="claim-info">
+                        <h3 id="claim-title">Medical Expense Reimbursement</h3>
+                        <p id="claim-type">Health & Wellness</p>
+                    </div>
+                    <div class="claim-amount">
+                        <div class="amount-value" id="claim-amount">₦150,000</div>
+                        <div class="amount-label">Approved Amount</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Tabs -->
+            <div class="card">
+                <div class="tabs">
+                    <div class="tabs-header">
+                        <div class="tab active" data-tab="bank">
+                            <i class="fas fa-university"></i> Bank Transfer
+                        </div>
+                        <div class="tab" data-tab="paystack">
+                            <i class="fas fa-credit-card"></i> Paystack
+                        </div>
+                        <div class="tab" data-tab="momo">
+                            <i class="fas fa-mobile-alt"></i> Mobile Money
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer Tab -->
+                    <div class="tab-content active" id="bank-tab">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="card-title">Recipient Bank Details</h3>
+                                <div class="descriptions">
+                                    <div class="descriptions-item">
+                                        <div class="descriptions-label">Full Name</div>
+                                        <div class="descriptions-value">
+                                            <span id="recipient-name">John Doe</span>
+                                            <button class="btn btn-text copy-btn" data-text="John Doe">
+                                                <i class="far fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="descriptions-item">
+                                        <div class="descriptions-label">Bank Name</div>
+                                        <div class="descriptions-value">
+                                            <span id="bank-name">First Bank of Nigeria</span>
+                                            <button class="btn btn-text copy-btn" data-text="First Bank of Nigeria">
+                                                <i class="far fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="descriptions-item">
+                                        <div class="descriptions-label">Account Number</div>
+                                        <div class="descriptions-value">
+                                            <span id="account-number">3098765432</span>
+                                            <button class="btn btn-text copy-btn" data-text="3098765432">
+                                                <i class="far fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="descriptions-item">
+                                        <div class="descriptions-label">Account Type</div>
+                                        <div class="descriptions-value">
+                                            <span>Savings</span>
+                                        </div>
+                                    </div>
+                                    <div class="descriptions-item">
+                                        <div class="descriptions-label">Amount to Transfer</div>
+                                        <div class="descriptions-value">
+                                            <span class="amount-value">₦150,000</span>
+                                        </div>
+                                    </div>
+                                    <div class="descriptions-item">
+                                        <div class="descriptions-label">Claim Reference</div>
+                                        <div class="descriptions-value">
+                                            <span id="claim-reference">CL-2023-001</span>
+                                            <button class="btn btn-text copy-btn" data-text="CL-2023-001">
+                                                <i class="far fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="instructions">
+                                <h4>Instructions:</h4>
+                                <ul>
+                                    <li>Use the bank details above to make a transfer</li>
+                                    <li>Use the Claim Reference as the transfer narration</li>
+                                    <li>Upload proof of payment after completing the transfer</li>
+                                    <li>The system will automatically update the claim status once verified</li>
+                                </ul>
+                            </div>
+
+                            <div class="flex" style="gap: 16px;">
+                                <button class="btn btn-primary btn-lg" id="mark-paid-btn">
+                                    Mark as Paid
+                                </button>
+                                <button class="btn btn-secondary btn-lg" id="upload-proof-btn">
+                                    Upload Proof of Payment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paystack Tab -->
+                    <div class="tab-content" id="paystack-tab">
+                        <div class="space-y-6">
+                            <div class="text-center">
+                                <h3 class="card-title">Pay with Paystack</h3>
+                                <p class="text-secondary">Secure payment processing via Paystack</p>
+                            </div>
+
+                            <div class="payment-details">
+                                <div class="payment-row">
+                                    <span>Claim Amount:</span>
+                                    <span class="amount-value">₦150,000</span>
+                                </div>
+                                <div class="payment-row">
+                                    <span>Recipient:</span>
+                                    <span>John Doe</span>
+                                </div>
+                                <div class="payment-row">
+                                    <span>Claim ID:</span>
+                                    <span style="font-family: monospace;">CL-2023-001</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <button class="btn btn-primary btn-lg btn-block" id="paystack-btn">
+                                    <span id="paystack-text">Pay with Paystack</span>
+                                    <span id="paystack-loading" class="hidden">
+                                        <i class="fas fa-spinner fa-spin"></i> Processing...
+                                    </span>
+                                </button>
+                                
+                                <p class="text-center" style="color: var(--text-light); font-size: 14px;">
+                                    You will be redirected to Paystack's secure payment page
+                                </p>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--border-color); padding-top: 16px;">
+                                <h4 class="card-title">Benefits:</h4>
+                                <ul style="list-style-position: inside; color: var(--text-secondary);">
+                                    <li>Instant payment processing</li>
+                                    <li>Secure encryption</li>
+                                    <li>Automatic receipt generation</li>
+                                    <li>Real-time status updates</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Money Tab -->
+                    <div class="tab-content" id="momo-tab">
+                        <div class="space-y-6">
+                            <div class="text-center">
+                                <h3 class="card-title">Mobile Money Payment</h3>
+                                <p class="text-secondary">Pay via mobile money (MTN, Airtel, etc.)</p>
+                            </div>
+
+                            <div class="payment-details">
+                                <div class="input-group">
+                                    <label class="input-label">Recipient Phone Number</label>
+                                    <input type="tel" class="input-field" id="phone-number" placeholder="Enter phone number (e.g., 08012345678)">
+                                    <p class="input-help">Enter the recipient's mobile money registered phone number</p>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <div class="payment-row">
+                                        <span>Amount:</span>
+                                        <span class="font-bold">₦150,000</span>
+                                    </div>
+                                    <div class="payment-row">
+                                        <span>Service Charge (1.5%):</span>
+                                        <span>₦2,250</span>
+                                    </div>
+                                    <div class="payment-row payment-total">
+                                        <span>Total:</span>
+                                        <span class="amount-value">₦152,250</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg btn-block" id="momo-btn">
+                                <span id="momo-text">Send via Mobile Money</span>
+                                <span id="momo-loading" class="hidden">
+                                    <i class="fas fa-spinner fa-spin"></i> Processing...
+                                </span>
+                            </button>
+
+                            <div class="notes">
+                                <h4>Note:</h4>
+                                <ul>
+                                    <li>1.5% service charge applies to MoMo payments</li>
+                                    <li>Ensure the phone number is registered for mobile money</li>
+                                    <li>Payment may take 2-5 minutes to reflect</li>
+                                    <li>Keep your transaction reference for tracking</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Status Timeline -->
+            <div class="card">
+                <h3 class="card-title">Payment Status</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot active"></div>
+                        <div class="timeline-content">
+                            <h4>Claim Approved</h4>
+                            <p>Ready for payment processing</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Payment Initiated</h4>
+                            <p>Select payment method above</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>Payment Completed</h4>
+                            <p>Will update automatically</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Message -->
+        <div id="toast" class="toast">
+            <i class="fas fa-check-circle"></i>
+            <span id="toast-message">Copied to clipboard!</span>
+        </div>
+    </div>
+
+    <script>
+        // Claim data
+        const claimData = {
+            id: "CL-2023-001",
+            title: "Medical Expense Reimbursement",
+            type: "Health & Wellness",
+            amount: 150000,
+            status: "APPROVED",
+            user: {
+                firstName: "John",
+                lastName: "Doe",
+                bankDetails: {
+                    bankName: "First Bank of Nigeria",
+                    accountNumber: "3098765432",
+                    accountType: "Savings"
+                }
+            }
+        };
+
+        // DOM Elements
+        const loadingState = document.getElementById('loading-state');
+        const errorState = document.getElementById('error-state');
+        const notApprovedState = document.getElementById('not-approved-state');
+        const mainContent = document.getElementById('main-content');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        const backBtn = document.getElementById('back-btn');
+        const backErrorBtn = document.getElementById('back-error-btn');
+        const backClaimsBtn = document.getElementById('back-claims-btn');
+        const markPaidBtn = document.getElementById('mark-paid-btn');
+        const uploadProofBtn = document.getElementById('upload-proof-btn');
+        const paystackBtn = document.getElementById('paystack-btn');
+        const momoBtn = document.getElementById('momo-btn');
+        const phoneInput = document.getElementById('phone-number');
+        const paystackText = document.getElementById('paystack-text');
+        const paystackLoading = document.getElementById('paystack-loading');
+        const momoText = document.getElementById('momo-text');
+        const momoLoading = document.getElementById('momo-loading');
+
+        // Initialize the page
+        function initPage() {
+            // Simulate loading state for 1 second
+            showLoading();
+            
+            setTimeout(() => {
+                // Check claim status and show appropriate content
+                if (claimData.status === "APPROVED") {
+                    showMainContent();
+                    populateClaimData();
+                } else if (claimData.status === "PENDING") {
+                    showNotApprovedState();
+                } else {
+                    showErrorState();
+                }
+            }, 1000);
+        }
+
+        // Show loading state
+        function showLoading() {
+            loadingState.classList.remove('hidden');
+            errorState.classList.add('hidden');
+            notApprovedState.classList.add('hidden');
+            mainContent.classList.add('hidden');
+        }
+
+        // Show main content
+        function showMainContent() {
+            loadingState.classList.add('hidden');
+            errorState.classList.add('hidden');
+            notApprovedState.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+        }
+
+        // Show error state
+        function showErrorState() {
+            loadingState.classList.add('hidden');
+            errorState.classList.remove('hidden');
+            notApprovedState.classList.add('hidden');
+            mainContent.classList.add('hidden');
+        }
+
+        // Show not approved state
+        function showNotApprovedState() {
+            loadingState.classList.add('hidden');
+            errorState.classList.add('hidden');
+            notApprovedState.classList.remove('hidden');
+            mainContent.classList.add('hidden');
+        }
+
+        // Populate claim data in the UI
+        function populateClaimData() {
+            document.getElementById('claim-id').textContent = claimData.id;
+            document.getElementById('claim-title').textContent = claimData.title;
+            document.getElementById('claim-type').textContent = claimData.type;
+            document.getElementById('claim-amount').textContent = `₦${claimData.amount.toLocaleString()}`;
+            document.getElementById('recipient-name').textContent = `${claimData.user.firstName} ${claimData.user.lastName}`;
+            document.getElementById('bank-name').textContent = claimData.user.bankDetails.bankName;
+            document.getElementById('account-number').textContent = claimData.user.bankDetails.accountNumber;
+            document.getElementById('claim-reference').textContent = claimData.id;
+            
+            // Update copy buttons with correct data
+            document.querySelectorAll('.copy-btn[data-text="John Doe"]').forEach(btn => {
+                btn.setAttribute('data-text', `${claimData.user.firstName} ${claimData.user.lastName}`);
+            });
+            
+            document.querySelectorAll('.copy-btn[data-text="First Bank of Nigeria"]').forEach(btn => {
+                btn.setAttribute('data-text', claimData.user.bankDetails.bankName);
+            });
+            
+            document.querySelectorAll('.copy-btn[data-text="3098765432"]').forEach(btn => {
+                btn.setAttribute('data-text', claimData.user.bankDetails.accountNumber);
+            });
+            
+            document.querySelectorAll('.copy-btn[data-text="CL-2023-001"]').forEach(btn => {
+                btn.setAttribute('data-text', claimData.id);
+            });
+        }
+
+        // Tab switching functionality
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show active tab content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabId}-tab`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Copy to clipboard functionality
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const textToCopy = button.getAttribute('data-text');
+                copyToClipboard(textToCopy);
+                showToast('Copied to clipboard!', 'success');
+            });
+        });
+
+        // Copy text to clipboard
+        function copyToClipboard(text) {
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            
+            // Select and copy the text
+            textarea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary element
+            document.body.removeChild(textarea);
+        }
+
+        // Show toast message
+        function showToast(message, type = 'success') {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            toast.classList.add(type);
+            
+            // Show toast
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Button event handlers
+        backBtn.addEventListener('click', () => {
+            showToast('Navigating back to claims...', 'warning');
+        });
+
+        backErrorBtn.addEventListener('click', () => {
+            showToast('Navigating back to claims...', 'warning');
+        });
+
+        backClaimsBtn.addEventListener('click', () => {
+            showToast('Navigating back to claims...', 'warning');
+        });
+
+        markPaidBtn.addEventListener('click', () => {
+            showToast('Payment marked as completed!', 'success');
+            
+            // Update timeline
+            const timelineDots = document.querySelectorAll('.timeline-dot');
+            if (timelineDots.length >= 2) {
+                timelineDots[1].classList.add('active');
+            }
+        });
+
+        uploadProofBtn.addEventListener('click', () => {
+            showToast('Please select a file to upload', 'warning');
+        });
+
+        // Paystack payment simulation
+        paystackBtn.addEventListener('click', () => {
+            paystackText.classList.add('hidden');
+            paystackLoading.classList.remove('hidden');
+            
+            setTimeout(() => {
+                showToast('Redirecting to Paystack payment gateway...', 'success');
+                
+                // Simulate payment completion after 2 seconds
+                setTimeout(() => {
+                    showToast('Payment successful! Claim status updated.', 'success');
+                    paystackText.classList.remove('hidden');
+                    paystackLoading.classList.add('hidden');
+                    
+                    // Update timeline
+                    const timelineDots = document.querySelectorAll('.timeline-dot');
+                    if (timelineDots.length >= 3) {
+                        timelineDots[1].classList.add('active');
+                        timelineDots[2].classList.add('active');
+                    }
+                }, 2000);
+            }, 1000);
+        });
+
+        // Mobile Money payment simulation
+        momoBtn.addEventListener('click', () => {
+            const phoneNumber = phoneInput.value.trim();
+            
+            if (!phoneNumber) {
+                showToast('Please enter a phone number', 'error');
+                return;
+            }
+            
+            if (!/^\d{10,11}$/.test(phoneNumber)) {
+                showToast('Please enter a valid phone number', 'error');
+                return;
+            }
+            
+            momoText.classList.add('hidden');
+            momoLoading.classList.remove('hidden');
+            
+            setTimeout(() => {
+                showToast(`Initiating MoMo payment to ${phoneNumber}...`, 'success');
+                
+                // Simulate payment completion after 3 seconds
+                setTimeout(() => {
+                    showToast('Mobile Money payment sent successfully!', 'success');
+                    momoText.classList.remove('hidden');
+                    momoLoading.classList.add('hidden');
+                    
+                    // Update timeline
+                    const timelineDots = document.querySelectorAll('.timeline-dot');
+                    if (timelineDots.length >= 3) {
+                        timelineDots[1].classList.add('active');
+                        timelineDots[2].classList.add('active');
+                    }
+                }, 3000);
+            }, 1000);
+        });
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>
