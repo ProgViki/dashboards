@@ -1,1 +1,339 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechWrite · senior software architect</title>
+  <!-- Tailwind via CDN + custom base -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* vscode blue + emerald green touches, classic sharp UI */
+    body {
+      background: #ffffff;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .border-vscode {
+      border-color: #007acc;
+    }
+    .text-vscode {
+      color: #007acc;
+    }
+    .bg-vscode {
+      background-color: #007acc;
+    }
+    .border-emerald {
+      border-color: #10b981;
+    }
+    .text-emerald {
+      color: #10b981;
+    }
+    .bg-emerald {
+      background-color: #10b981;
+    }
+    .hover-vscode:hover {
+      background-color: #007acc;
+      color: white;
+      border-color: #007acc;
+    }
+    .hover-emerald:hover {
+      background-color: #10b981;
+      color: white;
+      border-color: #10b981;
+    }
+    .sharp-card {
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      transition: box-shadow 0.15s ease, transform 0.1s ease;
+    }
+    .sharp-card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+    .badge-vscode {
+      background: #e8f0fe;
+      color: #007acc;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .badge-emerald {
+      background: #e6f9f1;
+      color: #10b981;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .subscribe-input {
+      border: 1px solid #d1d5db;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .subscribe-input:focus {
+      outline: none;
+      border-color: #007acc;
+      box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.15);
+    }
+    .btn-subscribe {
+      background: #007acc;
+      color: white;
+      border: 1px solid #007acc;
+      transition: background 0.15s, border 0.15s;
+    }
+    .btn-subscribe:hover {
+      background: #005f9e;
+      border-color: #005f9e;
+    }
+    /* classic clean article preview */
+    .article-preview {
+      border-bottom: 1px solid #f0f2f5;
+    }
+    .article-preview:last-of-type {
+      border-bottom: none;
+    }
+    .tag {
+      background: #f3f4f6;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #1f2937;
+      letter-spacing: 0.02em;
+    }
+    .tag-vscode {
+      background: #e8f0fe;
+      color: #007acc;
+    }
+    .tag-emerald {
+      background: #e6f9f1;
+      color: #10b981;
+    }
+    .social-icon {
+      color: #6b7280;
+      transition: color 0.15s;
+    }
+    .social-icon:hover {
+      color: #007acc;
+    }
+    .footer-border {
+      border-top: 1px solid #e5e7eb;
+    }
+    /* emerald accent touches */
+    .emerald-dot {
+      color: #10b981;
+    }
+    .vscode-dot {
+      color: #007acc;
+    }
+  </style>
+</head>
+<body>
+  <!-- main container : classic white, sharp edges, subtle touches -->
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+
+    <!-- header : architect identity + vscode/emerald accents -->
+    <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-gray-200/80">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight flex items-center gap-2">
+          <span class="text-gray-900">⌨️</span>
+          <span class="text-gray-800">techwrite</span>
+          <span class="text-vscode text-2xl font-light">·</span>
+          <span class="text-emerald text-2xl font-light">/</span>
+          <span class="text-sm font-mono font-normal text-gray-500 pt-1">architect</span>
+        </h1>
+        <div class="flex flex-wrap items-center gap-2 mt-1 text-sm text-gray-500">
+          <span class="bg-vscode/10 text-vscode px-3 py-0.5 rounded-full text-xs font-medium">SDLC</span>
+          <span class="bg-emerald/10 text-emerald px-3 py-0.5 rounded-full text-xs font-medium">DevOps</span>
+          <span class="bg-gray-100 text-gray-600 px-3 py-0.5 rounded-full text-xs font-medium">Analytics</span>
+          <span class="bg-gray-100 text-gray-600 px-3 py-0.5 rounded-full text-xs font-medium">Security</span>
+          <span class="text-xs text-gray-400 ml-1"><i class="fas fa-shield-alt text-emerald mr-1"></i> zero-trust</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 text-sm">
+        <span class="hidden sm:inline text-gray-400 text-xs"><i class="fas fa-rss text-vscode mr-1"></i> rss</span>
+        <a href="#" class="text-vscode hover:text-emerald transition-colors"><i class="fab fa-github"></i></a>
+        <a href="#" class="text-vscode hover:text-emerald transition-colors"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-vscode hover:text-emerald transition-colors"><i class="fab fa-linkedin-in"></i></a>
+        <span class="w-px h-5 bg-gray-300 mx-1"></span>
+        <span class="text-gray-400 text-xs flex items-center gap-1"><i class="fas fa-circle text-emerald text-[6px]"></i> 4.2k readers</span>
+      </div>
+    </header>
+
+    <!-- hero / short intro : architect flavour -->
+    <section class="py-8 flex flex-col md:flex-row justify-between items-start gap-6">
+      <div class="max-w-2xl">
+        <p class="text-lg text-gray-700 leading-relaxed">
+          <span class="font-semibold text-gray-800">Senior software architect</span> — 
+          deep dives into <span class="text-vscode font-medium">distributed systems</span>, 
+          <span class="text-emerald font-medium">cloud-native</span> patterns, 
+          and <span class="text-vscode font-medium">secure</span> by design. 
+          Production-grade write-ups for the pragmatic engineer.
+        </p>
+        <div class="flex flex-wrap items-center gap-3 mt-4 text-sm">
+          <span class="flex items-center gap-1 text-gray-500"><i class="far fa-clock text-vscode"></i> 12 min read avg</span>
+          <span class="flex items-center gap-1 text-gray-500"><i class="fas fa-code text-emerald"></i> go, rust, typescript</span>
+          <span class="flex items-center gap-1 text-gray-500"><i class="fas fa-cloud text-vscode"></i> k8s, aws, azure</span>
+        </div>
+      </div>
+      <div class="flex flex-col items-start md:items-end gap-2 w-full md:w-auto">
+        <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-xs text-gray-600 flex items-center gap-2">
+          <i class="fas fa-shield-halved text-emerald"></i> 
+          <span>security audit · <span class="font-mono text-vscode">v1.4.2</span></span>
+        </div>
+        <div class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-xs text-gray-600 flex items-center gap-2">
+          <i class="fas fa-chart-line text-vscode"></i> 
+          <span>analytics · <span class="font-mono">6.2k page views (weekly)</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- subscription card : sharp, clean, with vscode/emerald accents -->
+    <div class="bg-white border border-gray-200 rounded-xl p-5 md:p-6 my-6 sharp-card">
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+        <div class="flex-1">
+          <h3 class="text-base font-semibold text-gray-800 flex items-center gap-2">
+            <i class="fas fa-envelope text-vscode"></i> 
+            never miss a post
+            <span class="text-xs font-normal text-gray-400 ml-1">· subscribe</span>
+          </h3>
+          <p class="text-sm text-gray-500 mt-0.5">get weekly insights on system design, devops & security.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row w-full md:w-auto gap-2">
+          <input type="email" placeholder="you@example.com" 
+                 class="subscribe-input px-4 py-2.5 rounded-lg text-sm w-full sm:w-64 bg-white text-gray-700">
+          <button class="btn-subscribe px-6 py-2.5 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
+            <i class="fas fa-paper-plane text-xs"></i> subscribe
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 mt-3 text-xs text-gray-400 border-t border-gray-100 pt-3">
+        <span><i class="fas fa-check-circle text-emerald mr-1"></i> no spam, unsubscribe anytime</span>
+        <span><i class="fas fa-lock text-vscode mr-1"></i> 256-bit encrypted</span>
+        <span><i class="fas fa-user-check text-emerald mr-1"></i> 2k+ subscribers</span>
+      </div>
+    </div>
+
+    <!-- blog posts : classic list with vscode & emerald tags -->
+    <section class="mt-8">
+      <div class="flex items-center justify-between border-b border-gray-200 pb-2 mb-4">
+        <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+          <i class="fas fa-pen-fancy text-vscode"></i> latest write-ups
+          <span class="ml-2 text-xs font-normal text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">7 posts</span>
+        </h2>
+        <a href="#" class="text-sm text-vscode hover:text-emerald font-medium transition-colors">view all <i class="fas fa-arrow-right ml-1"></i></a>
+      </div>
+
+      <!-- article 1 -->
+      <article class="article-preview py-5">
+        <div class="flex flex-col md:flex-row md:items-start gap-3">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 text-xs mb-1.5">
+              <span class="tag tag-vscode"><i class="fas fa-tag mr-1"></i> distributed systems</span>
+              <span class="tag tag-emerald"><i class="fas fa-shield-alt mr-1"></i> security</span>
+              <span class="text-gray-400 text-xs"><i class="far fa-calendar-alt mr-1"></i> 12 Jul 2026</span>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 leading-snug">
+              <a href="#" class="hover:text-vscode transition-colors">Zero-trust mesh: beyond the service mesh hype</a>
+            </h3>
+            <p class="text-gray-600 text-sm mt-1 leading-relaxed max-w-2xl">
+              Deep dive into identity-aware proxies, mTLS, and policy-as-code. 
+              Production patterns for multi-cluster secure communication.
+            </p>
+            <div class="flex items-center gap-4 mt-2 text-xs text-gray-400">
+              <span><i class="far fa-clock mr-1"></i> 14 min read</span>
+              <span><i class="fas fa-chart-simple mr-1"></i> 1.8k views</span>
+              <span class="flex items-center gap-1"><i class="fas fa-code text-vscode text-[10px]"></i> go · envoy</span>
+            </div>
+          </div>
+          <div class="flex md:flex-col items-start md:items-end gap-1 text-xs text-gray-400">
+            <span class="bg-gray-50 px-2 py-0.5 rounded border border-gray-200/60">#sre</span>
+            <span class="bg-gray-50 px-2 py-0.5 rounded border border-gray-200/60">#istio</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- article 2 -->
+      <article class="article-preview py-5">
+        <div class="flex flex-col md:flex-row md:items-start gap-3">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 text-xs mb-1.5">
+              <span class="tag tag-emerald"><i class="fas fa-tag mr-1"></i> devops</span>
+              <span class="tag tag-vscode"><i class="fas fa-cloud mr-1"></i> cloud</span>
+              <span class="text-gray-400 text-xs"><i class="far fa-calendar-alt mr-1"></i> 8 Jul 2026</span>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 leading-snug">
+              <a href="#" class="hover:text-vscode transition-colors">GitOps at scale: argocd + crossplane control plane</a>
+            </h3>
+            <p class="text-gray-600 text-sm mt-1 leading-relaxed max-w-2xl">
+              Declarative infrastructure, drift detection, and progressive delivery. 
+              Real-world multi-cluster management with AWS and Azure.
+            </p>
+            <div class="flex items-center gap-4 mt-2 text-xs text-gray-400">
+              <span><i class="far fa-clock mr-1"></i> 11 min read</span>
+              <span><i class="fas fa-chart-simple mr-1"></i> 2.1k views</span>
+              <span class="flex items-center gap-1"><i class="fas fa-code text-emerald text-[10px]"></i> yaml · cue</span>
+            </div>
+          </div>
+          <div class="flex md:flex-col items-start md:items-end gap-1 text-xs text-gray-400">
+            <span class="bg-gray-50 px-2 py-0.5 rounded border border-gray-200/60">#argocd</span>
+            <span class="bg-gray-50 px-2 py-0.5 rounded border border-gray-200/60">#crossplane</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- article 3 -->
+      <article class="article-preview py-5">
+        <div class="flex flex-col md:flex-row md:items-start gap-3">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 text-xs mb-1.5">
+              <span class="tag tag-vscode"><i class="fas fa-tag mr-1"></i> analytics</span>
+              <span class="tag tag-emerald"><i class="fas fa-database mr-1"></i> data</span>
+              <span class="text-gray-400 text-xs"><i class="far fa-calendar-alt mr-1"></i> 4 Jul 2026</span>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 leading-snug">
+              <a href="#" class="hover:text-vscode transition-colors">Streaming analytics with flink & iceberg: lakehouse patterns</a>
+            </h3>
+            <p class="text-gray-600 text-sm mt-1 leading-relaxed max-w-2xl">
+              Real-time event processing, schema evolution, and analytical 
+              views. Cost-optimized architectures for petabyte scale.
+            </p>
+            <div class="flex items-center gap-4 mt-2 text-xs text-gray-400">
+              <span><i class="far fa-clock mr-1"></i> 16 min read</span>
+              <span><i class="fas fa-chart-simple mr-1"></i> 1.2k views</span>
+              <span class="flex items-center gap-1"><i class="fas fa-code text-vscode text-[10px]"></i> java · sql</span>
+            </div>
+          </div>
+          <div class="flex md:flex-col items-start md:items-end gap-1 text-xs text-gray-400">
+            <span class="bg-gray-50 px-2 py-0.5 rounded border border-gray-200/60">#flink</span>
+            <span class="bg-gray-50 px-2 py-0.5 rounded border border-gray-200/60">#iceberg</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- "load more" subtle -->
+      <div class="flex justify-center mt-6">
+        <a href="#" class="text-sm text-gray-400 border border-gray-200 rounded-full px-5 py-1.5 hover:border-vscode hover:text-vscode transition-colors">
+          <i class="fas fa-rotate-right mr-1"></i> load more
+        </a>
+      </div>
+    </section>
+
+    <!-- footer / architect signature + analytics/security touch -->
+    <footer class="footer-border mt-12 pt-6 text-sm text-gray-400 flex flex-col md:flex-row justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <span class="font-medium text-gray-500">techwrite<span class="text-vscode">·</span>architect</span>
+        <span class="text-gray-300">|</span>
+        <span class="flex items-center gap-1"><i class="fas fa-shield-halved text-emerald"></i> ssl/tls</span>
+        <span class="flex items-center gap-1"><i class="fas fa-chart-line text-vscode"></i> plausible</span>
+        <span class="flex items-center gap-1"><i class="fas fa-code-branch text-emerald"></i> ci/cd</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-icon"><i class="fas fa-rss"></i></a>
+        <span class="text-xs text-gray-300">© 2026 · v1.4.2</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
